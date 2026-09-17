@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>Untuk Miok</title>
+
+  <meta
+    name="description"
+    content="Surat kecil dari Amplop untuk Mio Kohana."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+
+  <main class="wrap">
+
+    <p
+      class="sr-only"
+      id="hint"
+      aria-live="polite"
+    >
+      Ada surat kecil dari Amplop untuk Mio... 👀
+    </p>
+
+
+    <section
+      class="scene"
+      id="scene"
+      aria-label="Surat digital untuk Mio, ketuk amplop untuk membuka"
+    >
+
+      <!-- DEKORASI -->
+
+      <div
+        class="spark s1"
+        aria-hidden="true"
+      >✦</div>
+
+      <div
+        class="spark s2"
+        aria-hidden="true"
+      >♡</div>
+
+      <div
+        class="spark s3"
+        aria-hidden="true"
+      >✧</div>
+
+      <div
+        class="spark s4"
+        aria-hidden="true"
+      >💙</div>
+
+
+
+      <!-- suratnya -->
+
+      <article
+        class="letter"
+        id="letter"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+
+        <header class="letter-head">
+
+          <h1>
+            Awoo, Miok!
+          </h1>
+
+          <p class="sub">
+            sebuah surat kecil dari <b>Amplop</b>
+          </p>
+
+        </header>
+
+
+        <p>
+          Dari nemu cover <i>Til Kontal Kantil</i>, ternyata
+          aku malah lanjut ngikutin Mio sampai sekarang.
+          Nggak nyangka juga wkwk.
+        </p>
+
+
+        <p>
+          Maaci udah bikin banyak momen random terasa
+          gong banget wwww. Dari ngobrol, bercanda, mipa, bahkan adu yapping T_T
+        </p>
+
+
+        <p>
+          Semoga Mio selalu sehat, bahagia, terus berkarya,
+          dan tetap punya banyak alasan buat makan gembus.
+          Selamat ulang tahun dan 2nd anniversary!
+        </p>
+
+
+        <!-- FAN ART -->
+
+        <figure class="stamp-wrap">
+
+          <div class="stamp">
+
+            <img
+              src="assets/miok_art.jpg"
+              alt="Fan art Mio Kohana"
+              onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+            >
+
+
+            <div
+              class="stamp-placeholder"
+              hidden
+            >
+              kelarin fanart nya bocil!<br>
+              <b>assets/miok_art.png</b>
+            </div>
+
+          </div>
+
+
+          <figcaption>
+            dibuat sepenuh tenaga dan kemampuanku T_T
+          </figcaption>
+
+        </figure>
+
+
+        <!-- SIGNATURE -->
+
+        <div class="sign">
+
+          — Amloafer<br>
+        </div>
+
+      </article>
+
+      <!-- amplop -->
+
+      <div
+        class="envelope"
+        id="envelope"
+        role="button"
+        tabindex="0"
+        aria-label="Buka amplop surat"
+        aria-expanded="false"
+      >
+
+        <div
+          class="env-back"
+          aria-hidden="true"
+        ></div>
+
+
+        <div
+          class="env-left"
+          aria-hidden="true"
+        ></div>
+
+
+        <div
+          class="env-right"
+          aria-hidden="true"
+        ></div>
+
+
+        <div
+          class="env-front"
+          aria-hidden="true"
+        ></div>
+
+
+        <div
+          class="env-flap"
+          aria-hidden="true"
+        ></div>
+
+
+        <div
+          class="seal"
+          aria-hidden="true"
+        >
+          <img 
+            src="assets/seal_blue.png"
+            alt="seal"
+          > 
+        </div>
+
+
+        <div class="label">
+          Untuk Mio Kohana
+        </div>
+
+      </div>
+
+
+      <p
+        class="sr-only"
+        id="envelopeNote"
+        aria-live="polite"
+      >
+        klik amplop untuk membuka
+      </p>
+
+    </section>
+
+  </main>
+
+
+
+  <script>
+
+    const scene =
+      document.getElementById("scene");
+
+    const envelope =
+      document.getElementById("envelope");
+
+    const letter =
+      document.getElementById("letter");
+
+    const hint =
+      document.getElementById("hint");
+
+    const envelopeNote =
+      document.getElementById("envelopeNote");
+
+
+    let state = "closed";
+
+
+    /* fit scene */
+
+    function fitSceneToLetter() {
+
+      if (state === "closed") {
+        return;
+      }
+
+
+      const letterHeight =
+        letter.scrollHeight;
+
+
+      const envelopeHeight =
+        envelope.offsetHeight;
+
+
+      const viewportBonus =
+        window.innerWidth <= 600
+          ? 36
+          : 48;
+
+
+      scene.style.minHeight =
+        Math.max(
+          letterHeight + viewportBonus,
+          envelopeHeight + viewportBonus
+        ) + "px";
+
+    }
+
+
+
+    /* scroll buat mobile */
+
+    function scrollToLetterOnPhone() {
+
+      if (
+        !window.matchMedia(
+          "(max-width: 700px)"
+        ).matches
+      ) {
+        return;
+      }
+
+
+      window.setTimeout(() => {
+
+        letter.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 900);
+
+    }
+
+
+
+    /* bukak */
+
+    function openEnvelope() {
+
+      if (state !== "closed") {
+        return;
+      }
+
+
+      state = "opening";
+
+
+      scene.classList.remove(
+        "closing",
+        "opened"
+      );
+
+
+      scene.classList.add(
+        "opening"
+      );
+
+
+      envelope.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+
+
+      envelope.setAttribute(
+        "aria-label",
+        "Amplop sedang dibuka"
+      );
+
+
+      letter.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      hint.textContent =
+        "Sebentar... suratnya keluar";
+
+
+      envelopeNote.textContent =
+        "membuka surat...";
+
+      window.setTimeout(() => {
+
+        if (state !== "opening") {
+          return;
+        }
+
+
+        state = "opened";
+
+
+        scene.classList.remove(
+          "opening"
+        );
+
+
+        scene.classList.add(
+          "opened"
+        );
+
+
+        hint.textContent =
+          "Surat kecil dari Amplop untuk Mio";
+
+
+        envelopeNote.textContent =
+          "surat sudah terbuka";
+
+
+        letter.focus({
+          preventScroll: true
+        });
+
+
+        fitSceneToLetter();
+
+
+        scrollToLetterOnPhone();
+
+      }, 1750);
+
+    }
+
+    /* tutup */
+
+    function closeEnvelope() {
+
+      if (state !== "opened") {
+        return;
+      }
+
+
+      state = "closing";
+
+
+      scene.classList.remove(
+        "opened",
+        "opening"
+      );
+
+
+      scene.classList.add(
+        "closing"
+      );
+
+
+      envelope.setAttribute(
+        "aria-label",
+        "Amplop sedang ditutup"
+      );
+
+
+      hint.textContent =
+        "Suratnya balik ke amplop...";
+
+
+      envelopeNote.textContent =
+        "menutup surat...";
+
+
+      window.setTimeout(() => {
+
+        if (state !== "closing") {
+          return;
+        }
+
+
+        state = "closed";
+
+
+        scene.classList.remove(
+          "closing"
+        );
+
+
+        scene.style.minHeight = "";
+
+
+        envelope.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+
+        envelope.setAttribute(
+          "aria-label",
+          "Buka amplop surat"
+        );
+
+
+        letter.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+
+        hint.textContent =
+          "Ada surat kecil dari Amplop untuk Mio... 👀";
+
+
+        envelopeNote.textContent =
+          "klik amplop untuk membuka";
+
+      }, 1750);
+
+    }
+
+
+
+    /* klik */
+
+    scene.addEventListener(
+      "click",
+      (event) => {
+
+        const clickedEnvelope =
+          event.target.closest(
+            "#envelope"
+          );
+
+
+        if (clickedEnvelope) {
+
+          if (state === "closed") {
+
+            openEnvelope();
+
+          }
+          else if (
+            state === "opened"
+          ) {
+
+            closeEnvelope();
+
+          }
+
+
+          return;
+
+        }
+
+
+        if (state === "opened") {
+
+          closeEnvelope();
+
+        }
+
+      }
+    );
+
+    /* keybrod*/
+
+    envelope.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+
+          event.preventDefault();
+
+
+          if (state === "closed") {
+
+            openEnvelope();
+
+          }
+          else if (
+            state === "opened"
+          ) {
+
+            closeEnvelope();
+
+          }
+
+        }
+
+      }
+    );
+
+
+
+    /* esc */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          state === "opened"
+        ) {
+
+          closeEnvelope();
+
+        }
+
+      }
+    );
+
+    /* resize */
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        if (state === "opened") {
+
+          fitSceneToLetter();
+
+        }
+
+      }
+    );
+
+
+
+    /* resize observer */
+
+    if ("ResizeObserver" in window) {
+
+      const observer =
+        new ResizeObserver(() => {
+
+          if (state === "opened") {
+
+            fitSceneToLetter();
+
+          }
+
+        });
+
+
+      observer.observe(letter);
+
+    }
+
+  </script>
+
+</body>
+</html>
